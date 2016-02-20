@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<title></title>
+<script src="js/angular.min.js"></script>
+<script src="js/component.js"></script>
+<script src="js/app.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://angularjs.org/css/bootstrap.min.css"/>
+<style type="text/css">
+	
+	.done-true {
+  text-decoration: line-through;
+  color: grey;
+}
+</style>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="ctrl">
+      <label>add new todo:</label>
+      <div>
+	     <select ng-model="data.singleSelect">
+ 	      <option  value="">pick responsiabl</option>
+	      <option ng-repeat="responsiable in responsiables" value="{{responsiable}}">{{responsiable}}</option>
+	    </select>
+	      <input type="text" ng-model="title" placeholder="Enter a title here">
+	      <input type="text" ng-model="content" placeholder="Enter a content here">
+	      <input type="date" placeholder="{{Date.now()}}"  ng-model="when"/>
+	      <div>{{}}</div>
+	  </div>
+      <button class="btn-primary" ng-click="addTodoList()">Add to the List!</button>
+      <h1>Hello you have left {{ numOfTodoNotDone() }} todo list!</h1>
+      <b>Todo {{filterBy}} List:</b>
+      <hr>
+
+      <select ng-model="filterBy">
+ 	      <option value="all">pick filter</option>
+	      <option value="today">today</option>
+	      <option value="all">all</option>
+	    </select>
+
+      <ul > 
+      		<li ng-repeat="todo in todos | filter:filterDate" > 
+	      		<label class="
+	      		checkbox">
+	      			<div class="done-{{todo.isDone}}">
+		      			<h4 ><input type="checkbox" ng-model="todo.isDone"><i>{{todo.title}}</i></h4> 
+		      			<div>{{todo.content}}</div>
+		      			<div>{{todo.responsiable}}</div>
+		      			<div><button class="btn-danger" ng-click="remove(todo)">Remove</button>
+		      		</div>
+		      	</label>
+      		</li>
+      </ul>
+      <tabs>
+	       <pane title="Localization">
+	        Date: {{ '2012-04-01' | date:'fullDate' }} <br>
+	        Currency: {{ 123456 | currency }} <br>
+	        Number: {{ 98765.4321 | number }} <br>
+	      </pane>
+	      <pane title="Pane">
+	        	Pane example
+	      </pane>
+      </tabs>
+    </div>
+</body>
+</html>
